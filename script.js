@@ -7,10 +7,53 @@ const canvas = document.querySelector('canvas.webgl');
 const scene = new THREE.Scene();
 
 //Objects
-const cube = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-const mesh = new THREE.Mesh(cube, material);
-scene.add(mesh);
+const group = new THREE.Group();
+group.position.z = -1;
+scene.add(group);
+
+const cube1 = new THREE.Mesh(
+    new THREE.BoxGeometry(0.5, 0.5, 0.5),
+    new THREE.MeshBasicMaterial({ color: 0xff0000 }),
+);
+
+cube1.position.set(1.5, 1, 1);
+
+group.add(cube1);
+
+const cube2 = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+);
+group.add(cube2);
+
+const cube3 = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshBasicMaterial({ color: 0x0000ff })
+);
+cube3.position.set(-1.5, -1, -1);
+group.add(cube3);
+
+//Position
+/*
+mesh.position.x = 0.7;
+mesh.position.y = -0.6;
+mesh.position.z = 1;
+
+mesh.position.set(0.7, -0.6, 1);
+*/
+
+//Scale
+/*
+mesh.scale.x = 0.5;
+mesh.scale.y = 1.5;
+mesh.scale.z = 0.75;
+
+mesh.scale.set(0.5, 1.5, 0.75);
+*/
+
+//Axes Helper
+const axesHelper = new THREE.AxesHelper();
+scene.add(axesHelper);
 
 //Sizes
 const sizes = {
@@ -19,8 +62,11 @@ const sizes = {
 };
 
 //Camera
-const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 1, 1000);
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 1, 1000);
 camera.position.z = 3;
+camera.position.y = 0.8;
+camera.position.x = 1;
+camera.rotateOnAxis(new THREE.Vector3(-0.5, 0.5, 0), 0.5);
 scene.add(camera);
 
 //Renderer
@@ -32,6 +78,7 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.render(scene, camera);
 
 // Animation function
+/*
 const animate = () => {
     // Rotate the cube
     mesh.rotation.x += 0.01; // Adjust X-axis rotation
@@ -46,3 +93,4 @@ const animate = () => {
 
 // Start the animation loop
 animate();
+*/
